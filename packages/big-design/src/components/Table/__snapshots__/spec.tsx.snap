@@ -99,73 +99,16 @@ exports[`renders a pagination component 1`] = `
 
 .c14 {
   vertical-align: middle;
+  color: #D9DCE9;
   height: 1.5rem;
   width: 1.5rem;
 }
 
-.c10 {
-  border-radius: 0.25rem;
-  box-shadow: 0px 1px 6px rgba(49,52,64,0.2);
-  border: 0;
-  -webkit-clip: rect(0 0 0 0);
-  clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(50%);
-  clip-path: inset(50%);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-  background-color: #FFFFFF;
+.c15 {
+  vertical-align: middle;
   color: #313440;
-  display: inline-block;
-  margin: 0;
-  max-height: 15.625rem;
-  outline: none;
-  overflow-y: scroll;
-  padding: 0.5rem 0;
-  z-index: 1060;
-}
-
-.c11 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  height: 2.25rem;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  min-width: 16rem;
-  outline: none;
-  padding: 0 1rem;
-}
-
-.c11[aria-selected='true'] {
-  font-weight: 600;
-}
-
-.c11[data-highlighted='true'],
-.c11[data-highlighted='true'] a {
-  background-color: #F0F3FF;
-  color: #3C64F4;
-}
-
-.c11 a {
-  color: #313440;
-}
-
-.c11 label {
-  cursor: pointer;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .c6 {
@@ -336,6 +279,71 @@ exports[`renders a pagination component 1`] = `
   visibility: visible;
 }
 
+.c10 {
+  border-radius: 0.25rem;
+  box-shadow: 0px 1px 6px rgba(49,52,64,0.2);
+  border: 0;
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  background-color: #FFFFFF;
+  color: #313440;
+  display: inline-block;
+  margin: 0;
+  max-height: 15.625rem;
+  outline: none;
+  overflow-y: scroll;
+  padding: 0.5rem 0;
+  z-index: 1060;
+}
+
+.c11 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 2.25rem;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  min-width: 16rem;
+  outline: none;
+  padding: 0 1rem;
+}
+
+.c11[aria-selected='true'] {
+  font-weight: 600;
+}
+
+.c11[data-highlighted='true'],
+.c11[data-highlighted='true'] a {
+  background-color: #F0F3FF;
+  color: #3C64F4;
+}
+
+.c11 a {
+  color: #313440;
+}
+
+.c11 label {
+  cursor: pointer;
+}
+
 .c7 {
   color: #313440;
   width: auto;
@@ -490,7 +498,7 @@ exports[`renders a pagination component 1`] = `
         class="c1 c5"
       >
         <button
-          class="c13 c7"
+          class="c13 bd-button"
           disabled=""
           role="button"
           tabindex="0"
@@ -500,6 +508,7 @@ exports[`renders a pagination component 1`] = `
           >
             <svg
               class="c14"
+              color="secondary30"
               fill="currentColor"
               height="24"
               stroke="currentColor"
@@ -521,7 +530,7 @@ exports[`renders a pagination component 1`] = `
           </span>
         </button>
         <button
-          class="c13 c7"
+          class="c13 bd-button"
           role="button"
           tabindex="0"
         >
@@ -529,7 +538,8 @@ exports[`renders a pagination component 1`] = `
             class="c8"
           >
             <svg
-              class="c14"
+              class="c15"
+              color="secondary70"
               fill="currentColor"
               height="24"
               stroke="currentColor"
