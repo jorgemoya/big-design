@@ -14,7 +14,7 @@ interface Navigation {
 export const StyledNavigation = styled(Flex.Item)<Navigation>`
   ${({ theme }) => theme.shadow.floating};
 
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
   border-bottom: ${({ theme }) => theme.border.box};
   border-radius: 0;
   border-top: ${({ theme }) => theme.border.box};

@@ -15,11 +15,11 @@ interface StyledFlexProps {
 }
 
 export const StyledTableHeaderCell = styled.th<StyledTableHeaderCellProps>`
-  background-color: ${({ theme }) => theme.colors.secondary10};
+  background-color: ${({ theme }) => theme.colors.backgroundPrimary};
   border-bottom: ${({ theme }) => theme.border.box};
   border-top: ${({ theme }) => theme.border.box};
   box-sizing: border-box;
-  color: ${({ theme }) => theme.colors.secondary60};
+  color: ${({ theme }) => theme.colors.header};
   font-size: ${({ theme }) => theme.typography.fontSize.medium};
   padding: ${({ theme }) => theme.spacing.small};
   white-space: nowrap;

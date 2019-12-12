@@ -10,7 +10,7 @@ const typographyProps: Prop[] = [
         Color
       </NextLink>
     ),
-    defaultValue: 'secondary70',
+    defaultValue: 'copy',
     description: (
       <>
         Sets the text color given a color name from our{' '}

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { ListProps } from './List';
 
 const SharedListStyles = css<ListProps>`
-  color: ${({ theme }) => theme.colors.secondary70};
+  color: ${({ theme }) => theme.colors.copy};
   font-size: ${({ theme }) => theme.typography.fontSize.medium};
   font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
   line-height: ${({ theme }) => theme.lineHeight.medium};

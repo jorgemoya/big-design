@@ -20,7 +20,7 @@ export const StyledTableFigure = styled.figure<MarginProps>`
 export const StyledTable = styled.table`
   border-color: transparent;
   border-spacing: 0;
-  color: ${({ theme }) => theme.colors.secondary70};
+  color: ${({ theme }) => theme.colors.copy};
   text-align: left;
   width: 100%;
 `;

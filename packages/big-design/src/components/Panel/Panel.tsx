@@ -41,7 +41,7 @@ export const RawPanel: React.FC<PanelProps> = memo(props => {
   return (
     <StyledPanel
       {...rest}
-      backgroundColor="white"
+      backgroundColor="backgroundSecondary"
       shadow="raised"
       padding={{ mobile: 'medium', tablet: 'xxLarge' }}
       borderRadius="none"

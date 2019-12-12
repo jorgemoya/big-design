@@ -10,7 +10,7 @@ export const StyledLink = styled.a<LinkProps & { isExternal?: boolean }>`
   ${withMargins()};
   ${withTransition(['color'], '70ms')}
 
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.link};
   cursor: pointer;
   font-size: ${({ theme }) => theme.typography.fontSize.medium};
   font-weight: ${({ theme }) => theme.typography.fontWeight.regular};

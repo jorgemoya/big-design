@@ -39,7 +39,7 @@ export const SnippetControls: React.FC<SnippetControls> = props => {
   return (
     <StyledFlex
       borderBottom="box"
-      backgroundColor="secondary20"
+      backgroundColor="backgroundSecondary"
       justifyContent="flex-end"
       alignItems="center"
       style={{ zIndex: 999 }}

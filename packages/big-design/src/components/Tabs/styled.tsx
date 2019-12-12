@@ -26,7 +26,7 @@ export const StyledTab = styled(StyleableButton)<TabProps>`
   ${props =>
     props.id === props.activeTab &&
     css`
-      color: ${props.theme.colors.secondary70};
+      color: ${props.theme.colors.copy};
 
       &:focus {
         box-shadow: none;

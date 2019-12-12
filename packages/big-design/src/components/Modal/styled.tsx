@@ -27,7 +27,7 @@ export const StyledModal = styled.div.attrs({
 `;
 
 export const StyledModalContent = styled(Flex)<{ variant: ModalProps['variant'] }>`
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.backgroundModal};
   box-sizing: border-box;
   position: fixed;
   z-index: ${({ theme }) => theme.zIndex.modal};

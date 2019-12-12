@@ -39,7 +39,7 @@ export const StyledBadge = styled.span<BadgeProps>`
   ${({ theme, variant }) =>
     variant === 'danger' &&
     css`
-      background-color: ${theme.colors.danger40};
+      background-color: ${theme.colors.danger};
     `}
 `;
 

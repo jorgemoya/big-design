@@ -15,7 +15,7 @@ export const StyledTooltipTrigger = styled.div<{ inline?: boolean }>`
 export const StyledTooltip = styled.div`
   ${({ theme }) => theme.shadow.floating};
 
-  background-color: ${({ theme }) => theme.colors.secondary70};
+  background-color: ${({ theme }) => theme.colors.copy};
   max-width: ${({ theme }) => theme.helpers.remCalc(336)};
   padding: ${({ theme }) => theme.spacing.xSmall};
   z-index: ${({ theme }) => theme.zIndex.tooltip};

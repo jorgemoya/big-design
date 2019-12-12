@@ -45,7 +45,7 @@ export const StyledListItem = styled.li<ListItemProps>`
     `}
 
   a {
-    color: ${({ theme }) => theme.colors.secondary70};
+    color: ${({ theme }) => theme.colors.copy};
   }
 
   label {

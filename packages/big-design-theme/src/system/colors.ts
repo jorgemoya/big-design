@@ -46,6 +46,20 @@ export interface Colors {
   success50: string;
   success60: string;
   success70: string;
+
+  backgroundPrimary: string;
+  backgroundSecondary: string;
+  backgroundInput: string;
+  backgroundModal: string;
+
+  copy: string;
+  link: string;
+  header: string;
+
+  border: string;
+  borderError: string;
+  borderInput: string;
+  borderInputFocused: string;
 }
 
 export const colors: Colors = {
@@ -64,7 +78,7 @@ export const colors: Colors = {
   primary: '#3C64F4',
   primary10: '#F0F3FF',
   primary20: '#DBE3FE',
-  primary30: '#9EB3FC',
+  primary30: '#5C81FF',
   primary40: '#3C64F4',
   primary50: '#2852EB',
   primary60: '#0B38D9',
@@ -73,7 +87,7 @@ export const colors: Colors = {
   danger: '#DB3643',
   danger10: '#FFF0F1',
   danger20: '#FEDBDE',
-  danger30: '#FC9EA6',
+  danger30: '#FF3F4E',
   danger40: '#DB3643',
   danger50: '#CC1F1F',
   danger60: '#AD0000',
@@ -86,7 +100,7 @@ export const colors: Colors = {
   warning40: '#FFBF00',
   warning50: '#FFAE00',
   warning60: '#E58F17',
-  warning70: '#CC720A',
+  warning70: '#967000',
 
   success: '#2AAB3F',
   success10: '#EEFCF0',
@@ -96,4 +110,18 @@ export const colors: Colors = {
   success50: '#208831',
   success60: '#146622',
   success70: '#004D0D',
+
+  backgroundPrimary: '#F6F7FC',
+  backgroundSecondary: '#FFFFFF',
+  backgroundInput: '#FFFFFF',
+  backgroundModal: '#FFFFFF',
+
+  copy: '#313440',
+  link: '#3E67F8',
+  header: '#5E637A',
+
+  border: '#D9DCE9',
+  borderError: '#DB3643',
+  borderInput: '#D9DCE9',
+  borderInputFocused: '#DBE3FE',
 };

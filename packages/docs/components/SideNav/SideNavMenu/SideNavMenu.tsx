@@ -14,7 +14,7 @@ export const SideNavMenu: React.FC = props => {
     <Flex.Item style={{ display: 'flex', alignItems: 'center' }}>
       <Flex>
         <StyledMenu>
-          <Button variant="subtle" onClick={handleClick} iconOnly={<MenuIcon color="secondary70" />} />
+          <Button variant="subtle" onClick={handleClick} iconOnly={<MenuIcon color="copy" />} />
         </StyledMenu>
         <StyledNavigation isExpanded={isExpanded} borderBottom="box" borderTop="box" shadow="floating">
           {props.children}

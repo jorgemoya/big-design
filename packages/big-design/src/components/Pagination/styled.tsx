@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { StyleableButton } from '../Button/private';
 
 export const StyledButton = styled(StyleableButton)`
-  color: ${({ theme }) => theme.colors.secondary70};
+  color: ${({ theme }) => theme.colors.copy};
   width: auto;
 `;
 

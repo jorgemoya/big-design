@@ -1,5 +1,7 @@
 import { GlobalStyles, Grid } from '@bigcommerce/big-design';
-import { createTheme } from '@bigcommerce/big-design-theme';
+import { theme } from '@bigcommerce/big-design-theme';
+import themes from 'big-design-themes';
+import produce from 'immer';
 import App from 'next/app';
 import Head from 'next/head';
 import { default as Router } from 'next/router';
@@ -11,7 +13,9 @@ import { pageView } from '../utils/analytics/gtm';
 
 Router.events.on('routeChangeComplete', url => pageView(url));
 
-const theme = createTheme();
+const customTheme = produce(theme, draft => {
+  draft.colors = { ...draft.colors, ...themes.darkTheme.colors };
+});
 
 const gridTemplate = {
   mobile: `
@@ -46,7 +50,7 @@ export default class MyApp extends App {
             }
           `}
         </style>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={customTheme}>
           <>
             <GlobalStyles />
             {router.query.noNav ? (
@@ -55,7 +59,7 @@ export default class MyApp extends App {
               <>
                 <Grid
                   gridTemplate={gridTemplate}
-                  backgroundColor="secondary10"
+                  backgroundColor="backgroundPrimary"
                   gridGap="0"
                   style={{ minHeight: '100%' }}
                 >

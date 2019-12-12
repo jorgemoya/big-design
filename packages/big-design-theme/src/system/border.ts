@@ -7,11 +7,11 @@ export type BorderRadius = ReturnType<typeof createBorderRadius>;
 
 export const createBorder = () => ({
   box: css`
-    ${({ theme }) => `1px solid ${theme.colors.secondary30}`};
+    ${({ theme }) => `1px solid ${theme.colors.border}`};
   `,
 
   boxError: css`
-    ${({ theme }) => `1px solid ${theme.colors.danger40}`};
+    ${({ theme }) => `1px solid ${theme.colors.borderError}`};
   `,
 
   none: 'none',

@@ -13,7 +13,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
   ${withTransition(['border', 'box-shadow'])}
 
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.backgroundInput};
   border-radius: ${({ theme }) => theme.borderRadius.normal};
   box-sizing: border-box;
   display: flex;
@@ -40,7 +40,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     focus &&
     css`
       outline: none;
-      box-shadow: 0 0 0 4px ${error ? theme.colors.danger20 : theme.colors.primary20};
+      box-shadow: 0 0 0 4px ${error ? theme.colors.danger20 : theme.colors.borderInputFocused};
     `};
 
   &[disabled] {
@@ -52,7 +52,7 @@ export const StyledInput = styled.input<InputProps>`
   background-color: inherit;
   border: 0;
   box-sizing: border-box;
-  color: ${({ theme }) => theme.colors.secondary70};
+  color: ${({ theme }) => theme.colors.copy};
   flex: 1;
   height: ${({ theme }) => theme.spacing.xLarge};
   margin-top: ${({ theme }) => theme.spacing.xxSmall};

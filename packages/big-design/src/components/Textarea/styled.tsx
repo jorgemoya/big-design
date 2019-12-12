@@ -14,10 +14,10 @@ export const StyledTextareaWrapper = styled.span<TextareaProps>`
 export const StyledTextarea = styled.textarea<TextareaProps>`
   ${withTransition(['border', 'box-shadow'])}
 
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.backgroundInput};
   border-radius: ${({ theme }) => theme.borderRadius.normal};
   box-sizing: border-box;
-  color: ${({ theme }) => theme.colors.secondary70};
+  color: ${({ theme }) => theme.colors.copy};
   line-height: ${({ theme }) => theme.lineHeight.medium};
   max-height: ${({ theme }) => theme.helpers.remCalc(224)};
   padding: ${({ theme }) => `${theme.spacing.xxSmall} ${theme.spacing.small}`};

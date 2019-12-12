@@ -4,9 +4,9 @@ import styled, { css } from 'styled-components';
 import { DataCellProps } from './DataCell';
 
 export const StyledTableDataCell = styled.td<DataCellProps>`
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
   box-sizing: border-box;
-  color: ${({ theme }) => theme.colors.secondary70};
+  color: ${({ theme }) => theme.colors.copy};
   font-size: ${({ theme }) => theme.typography.fontSize.medium};
   padding: ${({ theme, withPadding }) => (withPadding ? theme.spacing.small : 0)};
 
@@ -36,7 +36,7 @@ export const StyledTableDataCell = styled.td<DataCellProps>`
 `;
 
 export const StyledTableDataCheckbox = styled(StyledTableDataCell)`
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
   padding: ${({ theme }) => `0 ${theme.spacing.small}`};
 
   ${props =>

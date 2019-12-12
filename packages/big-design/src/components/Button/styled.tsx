@@ -43,7 +43,7 @@ export const StyledButton = styled.button<ButtonProps & MarginProps>`
   }
 
   &[disabled] {
-    border-color: ${({ theme }) => theme.colors.secondary30};
+    border-color: ${({ theme }) => theme.colors.border};
     pointer-events: none;
   }
 
@@ -116,7 +116,7 @@ const ButtonPrimary = css<ButtonProps>`
   }
 
   &[disabled] {
-    background-color: ${({ theme }) => theme.colors.secondary30};
+    background-color: ${({ theme }) => theme.colors.border};
   }
 `;
 
@@ -138,7 +138,7 @@ const ButtonPrimaryDestructive = css<ButtonProps>`
   }
 
   &[disabled] {
-    background-color: ${({ theme }) => theme.colors.secondary30};
+    background-color: ${({ theme }) => theme.colors.border};
   }
 `;
 
@@ -160,7 +160,7 @@ const ButtonSecondary = css<ButtonProps>`
   }
 
   &[disabled] {
-    color: ${({ theme }) => theme.colors.secondary30};
+    color: ${({ theme }) => theme.colors.border};
   }
 `;
 
@@ -182,7 +182,7 @@ const ButtonSecondaryDestructive = css<ButtonProps>`
   }
 
   &[disabled] {
-    color: ${({ theme }) => theme.colors.secondary30};
+    color: ${({ theme }) => theme.colors.border};
   }
 `;
 
@@ -205,7 +205,7 @@ const ButtonSubtle = css<ButtonProps>`
 
   &[disabled] {
     border-color: transparent;
-    color: ${({ theme }) => theme.colors.secondary30};
+    color: ${({ theme }) => theme.colors.border};
   }
 `;
 
@@ -228,7 +228,7 @@ const ButtonSubtleDestructive = css<ButtonProps>`
 
   &[disabled] {
     border-color: transparent;
-    color: ${({ theme }) => theme.colors.secondary30};
+    color: ${({ theme }) => theme.colors.border};
   }
 `;
 

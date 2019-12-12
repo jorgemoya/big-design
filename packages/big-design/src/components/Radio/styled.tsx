@@ -41,7 +41,7 @@ export const StyledRadio = styled.label<StyledRadioProps>`
   ${withTransition(['border-color', 'box-shadow'])}
 
   border: ${({ theme }) => theme.border.box};
-  border-color: ${props => (props.checked ? props.theme.colors.primary40 : props.theme.colors.secondary30)};
+  border-color: ${props => (props.checked ? props.theme.colors.primary40 : props.theme.colors.border)};
   border-radius: ${({ theme }) => theme.borderRadius.circle};
   color: ${({ theme }) => theme.colors.white};
   cursor: pointer;
@@ -55,7 +55,7 @@ export const StyledRadio = styled.label<StyledRadioProps>`
     disabled &&
     css`
       cursor: not-allowed;
-      border-color: ${theme.colors.secondary30};
+      border-color: ${theme.colors.border};
     `};
 
   &:hover {
@@ -64,7 +64,7 @@ export const StyledRadio = styled.label<StyledRadioProps>`
   }
 
   ${HiddenRadio}:focus + & {
-    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.primary20}`};
+    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.borderInputFocused}`};
   }
 
   &:after {
