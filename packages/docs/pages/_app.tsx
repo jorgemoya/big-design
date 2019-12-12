@@ -1,11 +1,11 @@
-import { GlobalStyles, Grid } from '@bigcommerce/big-design';
+import { Button, GlobalStyles, Grid } from '@bigcommerce/big-design';
 import { theme } from '@bigcommerce/big-design-theme';
 import themes from 'big-design-themes';
 import produce from 'immer';
 import App from 'next/app';
 import Head from 'next/head';
 import { default as Router } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { BetaRibbon, SideNav, StoryWrapper } from '../components';
@@ -13,7 +13,7 @@ import { pageView } from '../utils/analytics/gtm';
 
 Router.events.on('routeChangeComplete', url => pageView(url));
 
-const customTheme = produce(theme, draft => {
+const darkTheme = produce(theme, draft => {
   draft.colors = { ...draft.colors, ...themes.darkTheme.colors };
 });
 
@@ -30,6 +30,10 @@ const gridTemplate = {
 };
 
 export default class MyApp extends App {
+  readonly state = {
+    selectedTheme: 'light',
+  };
+
   render() {
     const { Component, pageProps, router } = this.props;
 
@@ -50,7 +54,7 @@ export default class MyApp extends App {
             }
           `}
         </style>
-        <ThemeProvider theme={customTheme}>
+        <ThemeProvider theme={this.state.selectedTheme === 'dark' ? darkTheme : theme}>
           <>
             <GlobalStyles />
             {router.query.noNav ? (
@@ -72,6 +76,7 @@ export default class MyApp extends App {
                     marginHorizontal={{ mobile: 'none', tablet: 'xxLarge' }}
                     style={{ maxWidth: '100%' }}
                   >
+                    <Button onClick={this.toggleTheme}>{this.state.selectedTheme}</Button>
                     <StoryWrapper>
                       <Component {...pageProps} />
                     </StoryWrapper>
@@ -85,4 +90,8 @@ export default class MyApp extends App {
       </>
     );
   }
+
+  private toggleTheme = () => {
+    this.setState({ selectedTheme: this.state.selectedTheme === 'light' ? 'dark' : 'light' });
+  };
 }

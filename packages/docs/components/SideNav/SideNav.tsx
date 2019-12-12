@@ -1,4 +1,4 @@
-import { Flex } from '@bigcommerce/big-design';
+import { Button, Flex } from '@bigcommerce/big-design';
 import React from 'react';
 
 import { BigDesignLogoIcon, GithubLogoIcon } from '../Icons';
