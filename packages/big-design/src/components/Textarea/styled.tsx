@@ -14,7 +14,7 @@ export const StyledTextareaWrapper = styled.span<TextareaProps>`
 export const StyledTextarea = styled.textarea<TextareaProps>`
   ${withTransition(['border', 'box-shadow'])}
 
-  background-color: ${({ theme }) => theme.colors.backgroundInput};
+  background-color: ${({ theme }) => theme.colors.input};
   border-radius: ${({ theme }) => theme.borderRadius.normal};
   box-sizing: border-box;
   color: ${({ theme }) => theme.colors.copy};

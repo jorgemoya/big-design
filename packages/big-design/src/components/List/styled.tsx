@@ -12,7 +12,7 @@ export const StyledList = styled.ul<StyledList>`
 
   ${props => !props.isOpen && hideVisually()}
 
-  background-color: ${({ theme }) => theme.colors.backgroundInput};
+  background-color: ${({ theme }) => theme.colors.input};
   color: ${({ theme }) => theme.colors.copy};
   display: inline-block;
   margin: 0;

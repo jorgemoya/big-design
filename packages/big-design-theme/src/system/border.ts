@@ -11,7 +11,7 @@ export const createBorder = () => ({
   `,
 
   boxError: css`
-    ${({ theme }) => `1px solid ${theme.colors.borderError}`};
+    ${({ theme }) => `1px solid ${theme.colors.danger}`};
   `,
 
   none: 'none',

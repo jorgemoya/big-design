@@ -104,19 +104,19 @@ const ButtonPrimary = css<ButtonProps>`
   font-weight: ${({ theme }) => theme.typography.fontWeight.semiBold};
 
   &:active {
-    background-color: ${({ theme }) => theme.colors.primary60};
+    background-color: ${({ theme }) => theme.colors.buttonActive};
   }
 
   &:focus {
-    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.primary20}`};
+    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.buttonFocus}`};
   }
 
   &:hover:not(:active) {
-    background-color: ${({ theme }) => theme.colors.primary50};
+    background-color: ${({ theme }) => theme.colors.buttonHover};
   }
 
   &[disabled] {
-    background-color: ${({ theme }) => theme.colors.border};
+    background-color: ${({ theme }) => theme.colors.buttonDisabled};
   }
 `;
 
@@ -126,19 +126,19 @@ const ButtonPrimaryDestructive = css<ButtonProps>`
   font-weight: ${({ theme }) => theme.typography.fontWeight.semiBold};
 
   &:active {
-    background-color: ${({ theme }) => theme.colors.danger60};
+    background-color: ${({ theme }) => theme.colors.buttonActiveDestuctive};
   }
 
   &:focus {
-    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.danger20}`};
+    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.buttonFocusDestructive}`};
   }
 
   &:hover:not(:active) {
-    background-color: ${({ theme }) => theme.colors.danger50};
+    background-color: ${({ theme }) => theme.colors.buttonHoverDestructive};
   }
 
   &[disabled] {
-    background-color: ${({ theme }) => theme.colors.border};
+    background-color: ${({ theme }) => theme.colors.buttonDisabled};
   }
 `;
 
@@ -148,19 +148,19 @@ const ButtonSecondary = css<ButtonProps>`
   color: ${({ theme }) => theme.colors.primary};
 
   &:active {
-    background-color: ${({ theme }) => theme.colors.primary20};
+    background-color: ${({ theme }) => theme.colors.buttonActiveSecondary};
   }
 
   &:focus {
-    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.primary20}`};
+    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.buttonFocus}`};
   }
 
   &:hover:not(:active) {
-    background-color: ${({ theme }) => theme.colors.primary10};
+    background-color: ${({ theme }) => theme.colors.buttonHoverSecondary};
   }
 
   &[disabled] {
-    color: ${({ theme }) => theme.colors.border};
+    color: ${({ theme }) => theme.colors.buttonDisabled};
   }
 `;
 
@@ -170,19 +170,19 @@ const ButtonSecondaryDestructive = css<ButtonProps>`
   color: ${({ theme }) => theme.colors.danger};
 
   &:active {
-    background-color: ${({ theme }) => theme.colors.danger20};
+    background-color: ${({ theme }) => theme.colors.buttonActiveSecondaryDestructive};
   }
 
   &:focus {
-    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.danger20}`};
+    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.buttonFocusDestructive}`};
   }
 
   &:hover:not(:active) {
-    background-color: ${({ theme }) => theme.colors.danger10};
+    background-color: ${({ theme }) => theme.colors.buttonHoverSecondaryDestructive};
   }
 
   &[disabled] {
-    color: ${({ theme }) => theme.colors.border};
+    color: ${({ theme }) => theme.colors.buttonDisabled};
   }
 `;
 
@@ -192,20 +192,20 @@ const ButtonSubtle = css<ButtonProps>`
   color: ${({ theme }) => theme.colors.primary};
 
   &:active {
-    background-color: ${({ theme }) => theme.colors.primary20};
+    background-color: ${({ theme }) => theme.colors.buttonActiveSecondary};
   }
 
   &:focus {
-    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.primary20}`};
+    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.buttonFocus}`};
   }
 
   &:hover:not(:active) {
-    background-color: ${({ theme }) => theme.colors.primary10};
+    background-color: ${({ theme }) => theme.colors.buttonHoverSecondary};
   }
 
   &[disabled] {
     border-color: transparent;
-    color: ${({ theme }) => theme.colors.border};
+    color: ${({ theme }) => theme.colors.buttonDisabled};
   }
 `;
 
@@ -215,20 +215,20 @@ const ButtonSubtleDestructive = css<ButtonProps>`
   color: ${({ theme }) => theme.colors.danger};
 
   &:active {
-    background-color: ${({ theme }) => theme.colors.danger20};
+    background-color: ${({ theme }) => theme.colors.buttonActiveSecondaryDestructive};
   }
 
   &:focus {
-    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.danger20}`};
+    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.buttonFocusDestructive}`};
   }
 
   &:hover:not(:active) {
-    background-color: ${({ theme }) => theme.colors.danger10};
+    background-color: ${({ theme }) => theme.colors.buttonHoverSecondaryDestructive};
   }
 
   &[disabled] {
     border-color: transparent;
-    color: ${({ theme }) => theme.colors.border};
+    color: ${({ theme }) => theme.colors.buttonDisabled};
   }
 `;
 

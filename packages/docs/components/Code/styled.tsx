@@ -9,7 +9,7 @@ export const StyledCode = styled.code<CodeProps>`
     highlight &&
     !primary &&
     css`
-      background-color: ${theme.colors.backgroundPrimary};
+      background-color: ${theme.colors.background};
       padding: ${theme.spacing.xxSmall};
     `};
 

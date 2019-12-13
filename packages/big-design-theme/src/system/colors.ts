@@ -47,19 +47,33 @@ export interface Colors {
   success60: string;
   success70: string;
 
-  backgroundPrimary: string;
-  backgroundSecondary: string;
-  backgroundInput: string;
-  backgroundModal: string;
+  background: string;
+  foreground: string;
+  input: string;
 
   copy: string;
   link: string;
   header: string;
 
   border: string;
-  borderError: string;
-  borderInput: string;
-  borderInputFocused: string;
+  borderFocused: string;
+
+  buttonActive: string;
+  buttonActiveSecondary: string;
+
+  buttonActiveDestuctive: string;
+  buttonActiveSecondaryDestructive: string;
+
+  buttonFocus: string;
+  buttonFocusDestructive: string;
+
+  buttonHover: string;
+  buttonHoverSecondary: string;
+
+  buttonHoverDestructive: string;
+  buttonHoverSecondaryDestructive: string;
+
+  buttonDisabled: string;
 }
 
 export const colors: Colors = {
@@ -111,17 +125,31 @@ export const colors: Colors = {
   success60: '#146622',
   success70: '#004D0D',
 
-  backgroundPrimary: '#F6F7FC',
-  backgroundSecondary: '#FFFFFF',
-  backgroundInput: '#FFFFFF',
-  backgroundModal: '#FFFFFF',
+  background: '#F6F7FC',
+  foreground: '#FFFFFF',
+  input: '#FFFFFF',
 
   copy: '#313440',
   link: '#3E67F8',
   header: '#5E637A',
 
   border: '#D9DCE9',
-  borderError: '#DB3643',
-  borderInput: '#D9DCE9',
-  borderInputFocused: '#DBE3FE',
+  borderFocused: '#DBE3FE',
+
+  buttonActive: '#0B38D9',
+  buttonActiveSecondary: '#ECEEF5',
+
+  buttonActiveDestuctive: '#AD0000',
+  buttonActiveSecondaryDestructive: '#FEDBDE',
+
+  buttonFocus: '#DBE3FE',
+  buttonFocusDestructive: '#FEDBDE',
+
+  buttonHover: '#2852EB',
+  buttonHoverSecondary: '#F0F3FF',
+
+  buttonHoverDestructive: '#CC1F1F',
+  buttonHoverSecondaryDestructive: '#FFF0F1',
+
+  buttonDisabled: '#D9DCE9',
 };

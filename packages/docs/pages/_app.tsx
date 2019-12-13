@@ -31,7 +31,7 @@ const gridTemplate = {
 
 export default class MyApp extends App {
   readonly state = {
-    selectedTheme: 'light',
+    selectedTheme: 'dark',
   };
 
   render() {
@@ -63,7 +63,7 @@ export default class MyApp extends App {
               <>
                 <Grid
                   gridTemplate={gridTemplate}
-                  backgroundColor="backgroundPrimary"
+                  backgroundColor="background"
                   gridGap="0"
                   style={{ minHeight: '100%' }}
                 >

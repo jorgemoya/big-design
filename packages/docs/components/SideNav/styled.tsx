@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const StyledFlex = styled(Flex)`
   ${({ theme }) => theme.shadow.raised}
 
-  background-color: ${({ theme }) => theme.colors.backgroundPrimary};
+  background-color: ${({ theme }) => theme.colors.background};
   border-radius: 0;
   position: fixed;
   top: 0;

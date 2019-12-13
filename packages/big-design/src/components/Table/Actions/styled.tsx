@@ -7,7 +7,7 @@ import { withFlexedContainer } from '../../Flex/withFlex';
 export const StyledFlex = styled.div<FlexProps & { stickyHeader?: boolean }>`
   ${withFlexedContainer()}
 
-  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
+  background-color: ${({ theme }) => theme.colors.foreground};
   display: flex;
   padding: ${({ theme }) => theme.spacing.small};
 

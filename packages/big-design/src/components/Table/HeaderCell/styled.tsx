@@ -15,7 +15,7 @@ interface StyledFlexProps {
 }
 
 export const StyledTableHeaderCell = styled.th<StyledTableHeaderCellProps>`
-  background-color: ${({ theme }) => theme.colors.backgroundPrimary};
+  background-color: ${({ theme }) => theme.colors.background};
   border-bottom: ${({ theme }) => theme.border.box};
   border-top: ${({ theme }) => theme.border.box};
   box-sizing: border-box;

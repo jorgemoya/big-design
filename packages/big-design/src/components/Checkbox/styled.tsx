@@ -30,7 +30,7 @@ export const StyledCheckbox = styled.label<StyledCheckboxProps>`
 
   align-items: center;
   background: ${({ checked, isIndeterminate, theme }) =>
-    checked || isIndeterminate ? theme.colors.primary : theme.colors.backgroundInput};
+    checked || isIndeterminate ? theme.colors.primary : theme.colors.input};
   border: ${({ theme }) => theme.border.box};
   border-color: ${({ checked, isIndeterminate, theme }) =>
     checked || isIndeterminate ? theme.colors.primary : theme.colors.border};
@@ -58,7 +58,7 @@ export const StyledCheckbox = styled.label<StyledCheckboxProps>`
     }`}
 
   ${HiddenCheckbox}:focus + & {
-    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.borderInputFocused}`};
+    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.borderFocused}`};
   }
 
   svg {

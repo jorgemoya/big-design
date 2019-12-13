@@ -64,7 +64,7 @@ export const StyledRadio = styled.label<StyledRadioProps>`
   }
 
   ${HiddenRadio}:focus + & {
-    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.borderInputFocused}`};
+    box-shadow: ${({ theme }) => `0 0 0 ${theme.spacing.xxSmall} ${theme.colors.borderFocused}`};
   }
 
   &:after {
