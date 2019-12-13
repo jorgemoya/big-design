@@ -17,11 +17,11 @@ export const StyledLink = styled.a<LinkProps & { isExternal?: boolean }>`
   text-decoration: none;
 
   &:active {
-    color: ${({ theme }) => theme.colors.primary70};
+    color: ${({ theme }) => theme.colors.linkHover};
   }
 
   &:hover:not(:active) {
-    color: ${({ theme }) => theme.colors.primary70};
+    color: ${({ theme }) => theme.colors.linkHover};
   }
 
   ${({ isExternal, theme }) =>

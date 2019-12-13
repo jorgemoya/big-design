@@ -31,7 +31,7 @@ const gridTemplate = {
 
 export default class MyApp extends App {
   readonly state = {
-    selectedTheme: 'dark',
+    selectedTheme: 'light',
   };
 
   render() {
@@ -68,7 +68,7 @@ export default class MyApp extends App {
                   style={{ minHeight: '100%' }}
                 >
                   <Grid.Item gridArea="nav">
-                    <SideNav />
+                    <SideNav toggleTheme={this.toggleTheme} />
                   </Grid.Item>
                   <Grid.Item
                     gridArea="main"
@@ -76,7 +76,6 @@ export default class MyApp extends App {
                     marginHorizontal={{ mobile: 'none', tablet: 'xxLarge' }}
                     style={{ maxWidth: '100%' }}
                   >
-                    <Button onClick={this.toggleTheme}>{this.state.selectedTheme}</Button>
                     <StoryWrapper>
                       <Component {...pageProps} />
                     </StoryWrapper>

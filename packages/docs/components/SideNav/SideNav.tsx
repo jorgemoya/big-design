@@ -12,7 +12,11 @@ import { SideNavMenu } from './SideNavMenu';
 
 const CodeSandboxUrl = process.env.CODE_SANDBOX_URL as string;
 
-export const SideNav: React.FC = () => {
+interface SideNavProps {
+  toggleTheme(): void;
+}
+
+export const SideNav: React.FC<SideNavProps> = ({ toggleTheme }) => {
   return (
     <StyledFlex
       flexDirection={{ mobile: 'row', tablet: 'column' }}
@@ -23,6 +27,12 @@ export const SideNav: React.FC = () => {
     >
       <Flex.Item>
         <SideNavLogo />
+      </Flex.Item>
+
+      <Flex.Item paddingTop="large">
+        <Button onClick={toggleTheme} variant="secondary">
+          Toggle Theme
+        </Button>
       </Flex.Item>
 
       <SideNavMenu>

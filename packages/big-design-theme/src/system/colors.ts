@@ -53,6 +53,7 @@ export interface Colors {
 
   copy: string;
   link: string;
+  linkHover: string;
   header: string;
 
   border: string;
@@ -130,7 +131,8 @@ export const colors: Colors = {
   input: '#FFFFFF',
 
   copy: '#313440',
-  link: '#3E67F8',
+  link: '#3C64F4',
+  linkHover: '#0024A6',
   header: '#5E637A',
 
   border: '#D9DCE9',
