@@ -6,7 +6,7 @@ import { withTransition } from '../../mixins/transitions';
 import { ProgressBarProps } from './ProgressBar';
 
 export const StyledProgressBar = styled.div`
-  background-color: ${({ theme }) => theme.colors.secondary20};
+  background-color: ${({ theme }) => theme.colors.background};
   height: ${({ theme }) => theme.spacing.xxSmall};
   overflow: hidden;
   width: 100%;
