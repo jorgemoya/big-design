@@ -28,11 +28,11 @@ export const StyledListItem = styled.li<ListItemProps>`
       !disabled &&
       (actionType === 'normal'
         ? css`
-            background-color: ${({ theme }) => theme.colors.primary10};
+            background-color: ${({ theme }) => theme.colors.buttonHover};
             color: ${({ theme }) => theme.colors.primary};
           `
         : css`
-            background-color: ${({ theme }) => theme.colors.danger10};
+            background-color: ${({ theme }) => theme.colors.buttonHoverDestructive};
             color: ${({ theme }) => theme.colors.danger50};
           `)}
   }
