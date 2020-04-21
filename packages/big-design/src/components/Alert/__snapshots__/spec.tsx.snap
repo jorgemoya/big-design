@@ -68,6 +68,7 @@ exports[`render default (success) Alert 1`] = `
     class="c0 c3"
   >
     <svg
+      aria-labelledby="bd-icon-1"
       class="c4"
       color="success"
       fill="currentColor"
@@ -171,6 +172,7 @@ exports[`render error Alert 1`] = `
     class="c0 c3"
   >
     <svg
+      aria-labelledby="bd-icon-1"
       class="c4"
       color="danger"
       fill="currentColor"
@@ -270,6 +272,7 @@ exports[`render info Alert 1`] = `
     class="c0 c3"
   >
     <svg
+      aria-labelledby="bd-icon-1"
       class="c4"
       color="primary60"
       fill="currentColor"
@@ -373,6 +376,7 @@ exports[`render warning Alert 1`] = `
     class="c0 c3"
   >
     <svg
+      aria-labelledby="bd-icon-1"
       class="c4"
       color="warning50"
       fill="currentColor"
@@ -609,6 +613,7 @@ exports[`renders close button 1`] = `
     class="c0 c3"
   >
     <svg
+      aria-labelledby="bd-icon-1"
       class="c4"
       color="success"
       fill="currentColor"
@@ -653,6 +658,7 @@ exports[`renders close button 1`] = `
         class="c9"
       >
         <svg
+          aria-labelledby="bd-icon-2"
           class="c10"
           fill="currentColor"
           height="24"
@@ -754,6 +760,7 @@ exports[`renders header 1`] = `
     class="c0 c3"
   >
     <svg
+      aria-labelledby="bd-icon-1"
       class="c4"
       color="success"
       fill="currentColor"
@@ -909,6 +916,7 @@ exports[`renders with external link 1`] = `
     class="c0 c3"
   >
     <svg
+      aria-labelledby="bd-icon-1"
       class="c4"
       color="success"
       fill="currentColor"
@@ -948,6 +956,7 @@ exports[`renders with external link 1`] = `
           Link
         </span>
         <svg
+          aria-labelledby="bd-icon-2"
           class="c9"
           fill="currentColor"
           height="24"
@@ -1064,6 +1073,7 @@ exports[`renders with link 1`] = `
     class="c0 c3"
   >
     <svg
+      aria-labelledby="bd-icon-1"
       class="c4"
       color="success"
       fill="currentColor"
