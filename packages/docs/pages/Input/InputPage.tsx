@@ -89,6 +89,37 @@ const InputPage = () => (
       </Form>
       {/* jsx-to-string:end */}
     </CodePreview>
+
+    <H1>Masking</H1>
+
+    <Text>Inputs can also have a mask</Text>
+
+    <CodePreview>
+      {/* jsx-to-string:start */}
+      {function Example() {
+        const [value, setValue] = useState('12');
+
+        const handleChange = (event) => setValue(event.target.value);
+
+        return (
+          <Form>
+            <FormGroup>
+              <Input
+                label="Label"
+                description="Description for the input."
+                placeholder="Placeholder"
+                type="text"
+                value={value}
+                onChange={handleChange}
+                mask="99/99/99"
+                maskPlaceholder="dd/mm/yy"
+              />
+            </FormGroup>
+          </Form>
+        );
+      }}
+      {/* jsx-to-string:end */}
+    </CodePreview>
   </>
 );
 

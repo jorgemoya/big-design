@@ -1,4 +1,5 @@
 import React, { cloneElement, forwardRef, isValidElement, Ref, useMemo, useState } from 'react';
+import InputMask, { MaskOptions } from 'react-input-mask';
 
 import { useUniqueId } from '../../hooks';
 import { typedMemo, warning } from '../../utils';
@@ -14,6 +15,10 @@ interface Props {
   iconRight?: React.ReactNode;
   label?: React.ReactChild;
   labelId?: string;
+  mask?: MaskOptions['mask'];
+  maskPlaceholder?: MaskOptions['maskPlaceholder'];
+  alwaysShowMask?: MaskOptions['alwaysShowMask'];
+  beforeMaskedStateChange?: MaskOptions['beforeMaskedStateChange'];
 }
 
 interface PrivateProps {
@@ -30,6 +35,7 @@ const StyleableInput: React.FC<InputProps & PrivateProps> = ({
   forwardedRef,
   label,
   labelId,
+  mask,
   ...props
 }) => {
   const [focus, setFocus] = useState(false);
@@ -157,18 +163,23 @@ const StyleableInput: React.FC<InputProps & PrivateProps> = ({
         {renderedIconLeft}
         <StyledInputContent chips={chips}>
           {renderedChips}
-          <StyledInput
-            {...props}
-            disabled={disabled}
-            chips={chips}
-            error={errors}
-            id={id}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-            ref={forwardedRef}
-          />
+          {mask ? (
+            <InputMask {...props} mask={mask} onBlur={handleBlur} onFocus={handleFocus} disabled={disabled}>
+              <StyledInput chips={chips} error={errors} id={id} ref={forwardedRef} />
+            </InputMask>
+          ) : (
+            <StyledInput
+              {...props}
+              disabled={disabled}
+              chips={chips}
+              error={errors}
+              id={id}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              ref={forwardedRef}
+            />
+          )}
         </StyledInputContent>
-
         {renderedIconRight}
       </StyledInputWrapper>
     </div>
