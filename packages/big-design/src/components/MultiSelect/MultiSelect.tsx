@@ -375,34 +375,50 @@ export const MultiSelect = typedMemo(
       });
     }, [action, addSelectedItem, getItemProps, highlightedIndex, items, removeItem, renderAction, selectedOptions]);
 
-    const renderList = useMemo(() => {
-      return (
-        <Popper
-          modifiers={[{ name: 'offset', options: { offset: [0, 10] } }]}
-          placement={placement}
-          strategy={positionFixed ? 'fixed' : 'absolute'}
-        >
-          {({ placement: popperPlacement, ref, style: popperStyle, update }) => (
-            <List
-              {...getMenuProps({ ref })}
-              data-placement={popperPlacement}
-              maxHeight={maxHeight}
-              style={popperStyle}
-              update={update}
-            >
-              {renderOptions}
-            </List>
-          )}
-        </Popper>
-      );
-    }, [getMenuProps, maxHeight, placement, positionFixed, renderOptions]);
+    // const renderList = useMemo(() => {
+    //   return (
+    //     <Popper
+    //       modifiers={[{ name: 'offset', options: { offset: [0, 10] } }]}
+    //       placement={placement}
+    //       strategy={positionFixed ? 'fixed' : 'absolute'}
+    //     >
+    //       {({ placement: popperPlacement, ref, style: popperStyle, update }) => (
+    //         <List
+    //           {...getMenuProps({ ref })}
+    //           data-placement={popperPlacement}
+    //           maxHeight={maxHeight}
+    //           style={popperStyle}
+    //           update={update}
+    //         >
+    //           {renderOptions}
+    //         </List>
+    //       )}
+    //     </Popper>
+    //   );
+    // }, [getMenuProps, maxHeight, placement, positionFixed, renderOptions]);
 
     return (
       <div>
         <Manager>
           {renderLabel}
           <div {...getComboboxProps()}>{renderInput}</div>
-          {isOpen && renderList}
+          <Popper
+            modifiers={[{ name: 'offset', options: { offset: [0, 10] } }]}
+            placement={placement}
+            strategy={positionFixed ? 'fixed' : 'absolute'}
+          >
+            {({ placement: popperPlacement, ref, style: popperStyle, update }) => (
+              <List
+                {...getMenuProps({ ref })}
+                data-placement={popperPlacement}
+                maxHeight={maxHeight}
+                style={popperStyle}
+                update={update}
+              >
+                {isOpen && renderOptions}
+              </List>
+            )}
+          </Popper>
         </Manager>
       </div>
     );

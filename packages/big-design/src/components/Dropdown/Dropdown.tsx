@@ -60,21 +60,21 @@ export const Dropdown = memo(
       toggleButtonId: toggle.props.id,
     });
 
-    const renderToggle = useMemo(() => {
-      return (
-        <Reference>
-          {({ ref }) =>
-            isValidElement(toggle) &&
-            cloneElement<React.HTMLAttributes<any> & React.RefAttributes<any>>(toggle as any, {
-              ...getToggleButtonProps({
-                disabled,
-                ref,
-              }),
-            })
-          }
-        </Reference>
-      );
-    }, [disabled, getToggleButtonProps, toggle]);
+    // const renderToggle = useMemo(() => {
+    //   return (
+    //     <Reference>
+    //       {({ ref }) =>
+    //         isValidElement(toggle) &&
+    //         cloneElement<React.HTMLAttributes<any> & React.RefAttributes<any>>(toggle as any, {
+    //           ...getToggleButtonProps({
+    //             disabled,
+    //             ref,
+    //           }),
+    //         })
+    //       }
+    //     </Reference>
+    //   );
+    // }, [disabled, getToggleButtonProps, toggle]);
 
     const renderItem = useCallback(
       (item: DropdownItem) => {
@@ -198,19 +198,29 @@ export const Dropdown = memo(
               style={popperStyle}
               update={update}
             >
-              {renderChildren}
+              {isOpen && renderChildren}
             </List>
           )}
         </Popper>
       ),
-      [getMenuProps, highlightedIndex, maxHeight, placement, renderChildren, rest],
+      [getMenuProps, highlightedIndex, isOpen, maxHeight, placement, renderChildren, rest],
     );
 
     return (
       <Manager>
         <StyledBox>
-          {renderToggle}
-          {isOpen && renderList}
+          <Reference>
+            {({ ref }) =>
+              isValidElement(toggle) &&
+              cloneElement<React.HTMLAttributes<any> & React.RefAttributes<any>>(toggle as any, {
+                ...getToggleButtonProps({
+                  disabled,
+                  ref,
+                }),
+              })
+            }
+          </Reference>
+          {renderList}
         </StyledBox>
       </Manager>
     );

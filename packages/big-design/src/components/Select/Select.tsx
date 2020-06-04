@@ -64,8 +64,8 @@ export const Select = typedMemo(
     }, [flattenedOptions, value]);
 
     const [selectOptions, setSelectOptions] = useState(flattenedOptions);
-    const [inputValue, setInputValue] = useState(findSelectedOption ? findSelectedOption.content : '');
     const [selectedOption, setSelectedOption] = useState(findSelectedOption);
+    const [inputValue, setInputValue] = useState(selectedOption ? selectedOption.content : '');
     const [highlightedIndex, setHighlightedIndex] = useState(0);
 
     const defaultRef: RefObject<HTMLInputElement> = createRef();
@@ -74,14 +74,17 @@ export const Select = typedMemo(
     // Need to set select options if options prop changes
     useEffect(() => setSelectOptions(flattenedOptions), [flattenedOptions]);
 
+    useEffect(() => {
+      // setSelectedOption(findSelectedOption);
+      if (selectedOption && selectedOption.value !== value) {
+        setSelectedOption(findSelectedOption);
+      }
+    }, [findSelectedOption, selectedOption, value]);
+
     // Set the input's value to match the selected item
     useEffect(() => {
       setInputValue(selectedOption ? selectedOption.content : '');
     }, [selectedOption]);
-
-    useEffect(() => {
-      setSelectedOption(findSelectedOption);
-    }, [findSelectedOption]);
 
     const findSelectedOptionIndex = useMemo(() => {
       return selectOptions.findIndex((item) => 'value' in item && item.value === value);
@@ -126,6 +129,7 @@ export const Select = typedMemo(
       if (action && changes.selectedItem && changes.selectedItem.content === action.content) {
         action.onActionClick(inputValue);
       } else if (changes.selectedItem && 'value' in changes.selectedItem && typeof onOptionChange === 'function') {
+        setSelectedOption(changes.selectedItem);
         onOptionChange(changes.selectedItem.value, changes.selectedItem);
       }
     };
@@ -178,25 +182,6 @@ export const Select = typedMemo(
       stateReducer: handleStateReducer,
     });
 
-    const setCallbackRef = useCallback(
-      (ref: HTMLInputElement) => {
-        if (typeof inputRef === 'function') {
-          inputRef(ref);
-        }
-      },
-      [inputRef],
-    );
-
-    const getInputRef = useCallback(() => {
-      if (inputRef && typeof inputRef === 'object') {
-        return inputRef;
-      } else if (typeof inputRef === 'function') {
-        return setCallbackRef;
-      }
-
-      return defaultRef;
-    }, [defaultRef, inputRef, setCallbackRef]);
-
     const renderLabel = useMemo(() => {
       return typeof label === 'string' ? (
         <FormControlLabel {...getLabelProps()} renderOptional={!required}>
@@ -219,6 +204,25 @@ export const Select = typedMemo(
         </DropdownButton>
       );
     }, [disabled, getToggleButtonProps]);
+
+    const setCallbackRef = useCallback(
+      (ref: HTMLInputElement) => {
+        if (typeof inputRef === 'function') {
+          inputRef(ref);
+        }
+      },
+      [inputRef],
+    );
+
+    const getInputRef = useCallback(() => {
+      if (inputRef && typeof inputRef === 'object') {
+        return inputRef;
+      } else if (typeof inputRef === 'function') {
+        return setCallbackRef;
+      }
+
+      return defaultRef;
+    }, [defaultRef, inputRef, setCallbackRef]);
 
     const renderInput = useMemo(() => {
       return (
@@ -385,34 +389,52 @@ export const Select = typedMemo(
       }
     }, [action, options, renderAction, renderGroup, renderOptions]);
 
-    const renderList = useMemo(() => {
-      return (
-        <Popper
-          modifiers={[{ name: 'offset', options: { offset: [0, 10] } }]}
-          placement={placement}
-          strategy={positionFixed ? 'fixed' : 'absolute'}
-        >
-          {({ placement: popperPlacement, ref, style: popperStyle, update }) => (
-            <List
-              {...getMenuProps({ ref })}
-              data-placement={popperPlacement}
-              maxHeight={maxHeight}
-              style={popperStyle}
-              update={update}
-            >
-              {renderChildren}
-            </List>
-          )}
-        </Popper>
-      );
-    }, [getMenuProps, maxHeight, placement, positionFixed, renderChildren]);
+    // const renderList = useMemo(() => {
+    //   console.log('renderList');
+
+    //   return (
+    //     <Popper
+    //       modifiers={[{ name: 'offset', options: { offset: [0, 10] } }]}
+    //       placement={placement}
+    //       strategy={positionFixed ? 'fixed' : 'absolute'}
+    //     >
+    //       {({ placement: popperPlacement, ref, style: popperStyle, update }) => (
+    //         <List
+    //           {...getMenuProps({ ref })}
+    //           data-placement={popperPlacement}
+    //           maxHeight={maxHeight}
+    //           style={popperStyle}
+    //           update={update}
+    //         >
+    //           {isOpen && renderChildren}
+    //         </List>
+    //       )}
+    //     </Popper>
+    //   );
+    // }, [getMenuProps, isOpen, maxHeight, placement, positionFixed, renderChildren]);
 
     return (
       <div>
         <Manager>
           {renderLabel}
           <div {...getComboboxProps()}>{renderInput}</div>
-          {isOpen && renderList}
+          <Popper
+            modifiers={[{ name: 'offset', options: { offset: [0, 10] } }]}
+            placement={placement}
+            strategy={positionFixed ? 'fixed' : 'absolute'}
+          >
+            {({ placement: popperPlacement, ref, style: popperStyle, update }) => (
+              <List
+                {...getMenuProps({ ref })}
+                data-placement={popperPlacement}
+                maxHeight={maxHeight}
+                style={popperStyle}
+                update={update}
+              >
+                {isOpen && renderChildren}
+              </List>
+            )}
+          </Popper>
         </Manager>
       </div>
     );

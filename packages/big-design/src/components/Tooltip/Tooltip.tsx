@@ -7,9 +7,9 @@ import { Small } from '../Typography';
 import { StyledTooltip, StyledTooltipTrigger } from './styled';
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
-  placement: PopperProps['placement'];
+  placement: PopperProps<any>['placement'];
   trigger: React.ReactChild;
-  modifiers?: PopperProps['modifiers'];
+  modifiers?: PopperProps<any>['modifiers'];
   inline?: boolean;
 }
 
