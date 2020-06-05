@@ -7,6 +7,7 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { usePopper } from 'react-popper';
@@ -47,10 +48,10 @@ export const MultiSelect = typedMemo(
     value,
     ...rest
   }: MultiSelectProps<T>): ReturnType<React.FC<MultiSelectProps<T>>> => {
-    const [referenceElement, setReferenceElement] = useState<null | HTMLInputElement>(null);
-    const [popperElement, setPopperElement] = useState<null | HTMLInputElement>(null);
+    const referenceElementRef = useRef<HTMLInputElement>(null);
+    const popperElementRef = useRef<HTMLInputElement>(null);
 
-    const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    const { styles, attributes } = usePopper(referenceElementRef.current, popperElementRef.current, {
       modifiers: [{ name: 'offset', options: { offset: [0, 10] } }],
       placement,
       strategy: positionFixed ? 'fixed' : 'absolute',
@@ -257,7 +258,7 @@ export const MultiSelect = typedMemo(
 
     const renderInput = useMemo(() => {
       return (
-        <StyledInputContainer ref={setReferenceElement}>
+        <StyledInputContainer ref={referenceElementRef}>
           <Input
             {...rest}
             {...getInputProps({
@@ -380,31 +381,24 @@ export const MultiSelect = typedMemo(
       });
     }, [action, addSelectedItem, getItemProps, highlightedIndex, items, removeItem, renderAction, selectedOptions]);
 
-    // const renderList = useMemo(() => {
-    //   return (
-    //     <List
-    //       {...getMenuProps({ ref: setPopperElement })}
-    //       maxHeight={maxHeight}
-    //       style={styles.popper}
-    //       {...attributes.popper}
-    //     >
-    //       {isOpen && renderOptions}
-    //     </List>
-    //   );
-    // }, [attributes.popper, getMenuProps, isOpen, maxHeight, renderOptions, styles.popper]);
-
-    return (
-      <div>
-        {renderLabel}
-        <div {...getComboboxProps()}>{renderInput}</div>
+    const renderList = useMemo(() => {
+      return (
         <List
-          {...getMenuProps({ ref: setPopperElement })}
+          {...getMenuProps({ ref: popperElementRef })}
           maxHeight={maxHeight}
           style={styles.popper}
           {...attributes.popper}
         >
           {isOpen && renderOptions}
         </List>
+      );
+    }, [attributes.popper, getMenuProps, isOpen, maxHeight, renderOptions, styles.popper]);
+
+    return (
+      <div>
+        {renderLabel}
+        <div {...getComboboxProps()}>{renderInput}</div>
+        {renderList}
       </div>
     );
   },

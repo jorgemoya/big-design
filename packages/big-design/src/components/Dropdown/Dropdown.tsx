@@ -1,5 +1,5 @@
 import { useSelect, UseSelectState } from 'downshift';
-import React, { cloneElement, Fragment, isValidElement, memo, useCallback, useMemo, useRef, useState } from 'react';
+import React, { cloneElement, Fragment, isValidElement, memo, useCallback, useMemo, useRef } from 'react';
 import { usePopper } from 'react-popper';
 
 import { useUniqueId } from '../../hooks';
@@ -25,11 +25,14 @@ export const Dropdown = memo(
     style,
     ...rest
   }: DropdownProps) => {
-    const [referenceElement, setReferenceElement] = useState<null | HTMLInputElement>(null);
-    const [popperElement, setPopperElement] = useState<null | HTMLInputElement>(null);
+    const referenceElementRef = useRef<HTMLInputElement>(null);
+    const popperElementRef = useRef<HTMLInputElement>(null);
 
-    const { styles, attributes } = usePopper(referenceElement, popperElement, {
-      modifiers: [{ name: 'eventListeners' }, { name: 'offset', options: { offset: [0, 10] } }],
+    const { styles, attributes } = usePopper(referenceElementRef.current, popperElementRef.current, {
+      modifiers: [
+        // { name: 'eventListeners', options: { scroll: isOpen, resize: isOpen } },
+        { name: 'offset', options: { offset: [0, 10] } },
+      ],
       placement,
       strategy: 'absolute',
     });
@@ -69,17 +72,17 @@ export const Dropdown = memo(
       toggleButtonId: toggle.props.id,
     });
 
-    // const renderToggle = useMemo(() => {
-    //   return (
-    //     isValidElement(toggle) &&
-    //     cloneElement<React.HTMLAttributes<any> & React.RefAttributes<any>>(toggle as any, {
-    //       ...getToggleButtonProps({
-    //         disabled,
-    //         ref,
-    //       }),
-    //     })
-    //   );
-    // }, [disabled, getToggleButtonProps, toggle]);
+    const renderToggle = useMemo(() => {
+      return (
+        isValidElement(toggle) &&
+        cloneElement<React.HTMLAttributes<any> & React.RefAttributes<any>>(toggle as any, {
+          ...getToggleButtonProps({
+            disabled,
+            ref: referenceElementRef,
+          }),
+        })
+      );
+    }, [disabled, getToggleButtonProps, toggle]);
 
     const renderItem = useCallback(
       (item: DropdownItem) => {
@@ -190,7 +193,7 @@ export const Dropdown = memo(
                 }
               }
             },
-            ref: setPopperElement,
+            ref: popperElementRef,
           })}
           maxHeight={maxHeight}
           style={styles.popper}
@@ -204,13 +207,7 @@ export const Dropdown = memo(
 
     return (
       <div>
-        {isValidElement(toggle) &&
-          cloneElement<React.HTMLAttributes<any> & React.RefAttributes<any>>(toggle as any, {
-            ...getToggleButtonProps({
-              disabled,
-              ref: setReferenceElement,
-            }),
-          })}
+        {renderToggle}
         {renderList}
       </div>
     );
