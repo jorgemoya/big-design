@@ -9,7 +9,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { Manager, Popper, Reference } from 'react-popper';
+import { usePopper } from 'react-popper';
 
 import { useUniqueId } from '../../hooks';
 import { typedMemo } from '../../utils';
@@ -47,6 +47,15 @@ export const MultiSelect = typedMemo(
     value,
     ...rest
   }: MultiSelectProps<T>): ReturnType<React.FC<MultiSelectProps<T>>> => {
+    const [referenceElement, setReferenceElement] = useState<null | HTMLInputElement>(null);
+    const [popperElement, setPopperElement] = useState<null | HTMLInputElement>(null);
+
+    const { styles, attributes } = usePopper(referenceElement, popperElement, {
+      modifiers: [{ name: 'offset', options: { offset: [0, 10] } }],
+      placement,
+      strategy: positionFixed ? 'fixed' : 'absolute',
+    });
+
     // Merge options and action
     const initialOptions = useMemo(() => (action ? [...options, action] : options), [action, options]);
 
@@ -248,52 +257,48 @@ export const MultiSelect = typedMemo(
 
     const renderInput = useMemo(() => {
       return (
-        <Reference>
-          {({ ref }) => (
-            <StyledInputContainer ref={ref}>
-              <Input
-                {...rest}
-                {...getInputProps({
-                  autoComplete: 'no',
-                  disabled,
-                  onFocus: openMenu,
-                  onKeyDown: (event) => {
-                    switch (event.key) {
-                      case 'Backspace':
-                        if (!inputValue) {
-                          removeItem(selectedOptions[selectedOptions.length - 1]);
-                        }
-                        break;
-                      case 'Enter':
-                        event.preventDefault();
-                        if (isOpen === false) {
-                          openMenu();
-                          (event.nativeEvent as any).preventDownshiftDefault = true;
-                        }
-                        break;
-                      case 'Escape':
-                        // Reset select
-                        if (isOpen === false) {
-                          onOptionsChange([], []);
-                        }
-                        break;
+        <StyledInputContainer ref={setReferenceElement}>
+          <Input
+            {...rest}
+            {...getInputProps({
+              autoComplete: 'no',
+              disabled,
+              onFocus: openMenu,
+              onKeyDown: (event) => {
+                switch (event.key) {
+                  case 'Backspace':
+                    if (!inputValue) {
+                      removeItem(selectedOptions[selectedOptions.length - 1]);
                     }
-                  },
-                  placeholder,
-                  ref: getInputRef(),
-                })}
-                chips={selectedOptions.map((option: SelectOption<T>) => ({
-                  label: option.content,
-                  onDelete: () => removeItem(option),
-                }))}
-                autoComplete="no"
-                iconRight={renderToggle}
-                readOnly={!filterable}
-                required={required}
-              />
-            </StyledInputContainer>
-          )}
-        </Reference>
+                    break;
+                  case 'Enter':
+                    event.preventDefault();
+                    if (isOpen === false) {
+                      openMenu();
+                      (event.nativeEvent as any).preventDownshiftDefault = true;
+                    }
+                    break;
+                  case 'Escape':
+                    // Reset select
+                    if (isOpen === false) {
+                      onOptionsChange([], []);
+                    }
+                    break;
+                }
+              },
+              placeholder,
+              ref: getInputRef(),
+            })}
+            chips={selectedOptions.map((option: SelectOption<T>) => ({
+              label: option.content,
+              onDelete: () => removeItem(option),
+            }))}
+            autoComplete="no"
+            iconRight={renderToggle}
+            readOnly={!filterable}
+            required={required}
+          />
+        </StyledInputContainer>
       );
     }, [
       disabled,
@@ -377,49 +382,29 @@ export const MultiSelect = typedMemo(
 
     // const renderList = useMemo(() => {
     //   return (
-    //     <Popper
-    //       modifiers={[{ name: 'offset', options: { offset: [0, 10] } }]}
-    //       placement={placement}
-    //       strategy={positionFixed ? 'fixed' : 'absolute'}
+    //     <List
+    //       {...getMenuProps({ ref: setPopperElement })}
+    //       maxHeight={maxHeight}
+    //       style={styles.popper}
+    //       {...attributes.popper}
     //     >
-    //       {({ placement: popperPlacement, ref, style: popperStyle, update }) => (
-    //         <List
-    //           {...getMenuProps({ ref })}
-    //           data-placement={popperPlacement}
-    //           maxHeight={maxHeight}
-    //           style={popperStyle}
-    //           update={update}
-    //         >
-    //           {renderOptions}
-    //         </List>
-    //       )}
-    //     </Popper>
+    //       {isOpen && renderOptions}
+    //     </List>
     //   );
-    // }, [getMenuProps, maxHeight, placement, positionFixed, renderOptions]);
+    // }, [attributes.popper, getMenuProps, isOpen, maxHeight, renderOptions, styles.popper]);
 
     return (
       <div>
-        <Manager>
-          {renderLabel}
-          <div {...getComboboxProps()}>{renderInput}</div>
-          <Popper
-            modifiers={[{ name: 'offset', options: { offset: [0, 10] } }]}
-            placement={placement}
-            strategy={positionFixed ? 'fixed' : 'absolute'}
-          >
-            {({ placement: popperPlacement, ref, style: popperStyle, update }) => (
-              <List
-                {...getMenuProps({ ref })}
-                data-placement={popperPlacement}
-                maxHeight={maxHeight}
-                style={popperStyle}
-                update={update}
-              >
-                {isOpen && renderOptions}
-              </List>
-            )}
-          </Popper>
-        </Manager>
+        {renderLabel}
+        <div {...getComboboxProps()}>{renderInput}</div>
+        <List
+          {...getMenuProps({ ref: setPopperElement })}
+          maxHeight={maxHeight}
+          style={styles.popper}
+          {...attributes.popper}
+        >
+          {isOpen && renderOptions}
+        </List>
       </div>
     );
   },

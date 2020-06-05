@@ -12,7 +12,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Manager, Popper, Reference } from 'react-popper';
+import { usePopper } from 'react-popper';
 
 import { useUniqueId } from '../../hooks';
 import { typedMemo } from '../../utils';
@@ -49,6 +49,15 @@ export const Select = typedMemo(
     value,
     ...rest
   }: SelectProps<T>): ReturnType<React.FC<SelectProps<T>>> => {
+    const [referenceElement, setReferenceElement] = useState<null | HTMLInputElement>(null);
+    const [popperElement, setPopperElement] = useState<null | HTMLInputElement>(null);
+
+    const { styles, attributes } = usePopper(referenceElement, popperElement, {
+      modifiers: [{ name: 'offset', options: { offset: [0, 10] } }],
+      placement,
+      strategy: positionFixed ? 'fixed' : 'absolute',
+    });
+
     // Merge options and action
     const flattenedOptions = useMemo(() => (action ? [...flattenOptions(options), action] : flattenOptions(options)), [
       action,
@@ -226,46 +235,42 @@ export const Select = typedMemo(
 
     const renderInput = useMemo(() => {
       return (
-        <Reference>
-          {({ ref }) => (
-            <StyledInputContainer ref={ref}>
-              <Input
-                {...rest}
-                {...getInputProps({
-                  autoComplete: 'no',
-                  disabled,
-                  onFocus: openMenu,
-                  onKeyDown: (event) => {
-                    switch (event.key) {
-                      case 'Enter':
-                        event.preventDefault();
-                        if (isOpen === false) {
-                          openMenu();
-                          (event.nativeEvent as any).preventDownshiftDefault = true;
-                        }
-                        break;
-                      case 'Escape':
-                        if (isOpen === false) {
-                          // reset select
-                          onOptionChange();
-                          setHighlightedIndex(-1);
-                        } else {
-                          closeMenu();
-                        }
-                        (event.nativeEvent as any).preventDownshiftDefault = true;
-                        break;
+        <StyledInputContainer ref={setReferenceElement}>
+          <Input
+            {...rest}
+            {...getInputProps({
+              autoComplete: 'no',
+              disabled,
+              onFocus: openMenu,
+              onKeyDown: (event) => {
+                switch (event.key) {
+                  case 'Enter':
+                    event.preventDefault();
+                    if (isOpen === false) {
+                      openMenu();
+                      (event.nativeEvent as any).preventDownshiftDefault = true;
                     }
-                  },
-                  placeholder,
-                  ref: getInputRef(),
-                })}
-                iconRight={renderToggle}
-                readOnly={!filterable}
-                required={required}
-              />
-            </StyledInputContainer>
-          )}
-        </Reference>
+                    break;
+                  case 'Escape':
+                    if (isOpen === false) {
+                      // reset select
+                      onOptionChange();
+                      setHighlightedIndex(-1);
+                    } else {
+                      closeMenu();
+                    }
+                    (event.nativeEvent as any).preventDownshiftDefault = true;
+                    break;
+                }
+              },
+              placeholder,
+              ref: getInputRef(),
+            })}
+            iconRight={renderToggle}
+            readOnly={!filterable}
+            required={required}
+          />
+        </StyledInputContainer>
       );
     }, [
       closeMenu,
@@ -390,52 +395,30 @@ export const Select = typedMemo(
     }, [action, options, renderAction, renderGroup, renderOptions]);
 
     // const renderList = useMemo(() => {
-    //   console.log('renderList');
-
     //   return (
-    //     <Popper
-    //       modifiers={[{ name: 'offset', options: { offset: [0, 10] } }]}
-    //       placement={placement}
-    //       strategy={positionFixed ? 'fixed' : 'absolute'}
+    //     <List
+    //       {...getMenuProps({ ref: setPopperElement })}
+    //       maxHeight={maxHeight}
+    //       style={styles.popper}
+    //       {...attributes.popper}
     //     >
-    //       {({ placement: popperPlacement, ref, style: popperStyle, update }) => (
-    //         <List
-    //           {...getMenuProps({ ref })}
-    //           data-placement={popperPlacement}
-    //           maxHeight={maxHeight}
-    //           style={popperStyle}
-    //           update={update}
-    //         >
-    //           {isOpen && renderChildren}
-    //         </List>
-    //       )}
-    //     </Popper>
+    //       {isOpen && renderChildren}
+    //     </List>
     //   );
-    // }, [getMenuProps, isOpen, maxHeight, placement, positionFixed, renderChildren]);
+    // }, [attributes.popper, getMenuProps, isOpen, maxHeight, renderChildren, styles.popper]);
 
     return (
       <div>
-        <Manager>
-          {renderLabel}
-          <div {...getComboboxProps()}>{renderInput}</div>
-          <Popper
-            modifiers={[{ name: 'offset', options: { offset: [0, 10] } }]}
-            placement={placement}
-            strategy={positionFixed ? 'fixed' : 'absolute'}
-          >
-            {({ placement: popperPlacement, ref, style: popperStyle, update }) => (
-              <List
-                {...getMenuProps({ ref })}
-                data-placement={popperPlacement}
-                maxHeight={maxHeight}
-                style={popperStyle}
-                update={update}
-              >
-                {isOpen && renderChildren}
-              </List>
-            )}
-          </Popper>
-        </Manager>
+        {renderLabel}
+        <div {...getComboboxProps()}>{renderInput}</div>
+        <List
+          {...getMenuProps({ ref: setPopperElement })}
+          maxHeight={maxHeight}
+          style={styles.popper}
+          {...attributes.popper}
+        >
+          {isOpen && renderChildren}
+        </List>
       </div>
     );
   },
