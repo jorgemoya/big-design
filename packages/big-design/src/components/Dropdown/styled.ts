@@ -21,6 +21,7 @@ export const StyledLink = styled.a`
 
 export const StyledBox = styled(Box)`
   position: relative;
+  background-color: blue;
 `;
 
 StyledLink.defaultProps = { theme: defaultTheme };

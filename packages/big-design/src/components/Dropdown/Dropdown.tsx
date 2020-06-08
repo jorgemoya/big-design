@@ -10,7 +10,7 @@ import { ListGroupHeader } from '../List/GroupHeader';
 import { ListItem } from '../List/Item';
 import { Tooltip } from '../Tooltip';
 
-import { StyledLink } from './styled';
+import { StyledBox, StyledLink } from './styled';
 import { DropdownItem, DropdownItemGroup, DropdownLinkItem, DropdownProps } from './types';
 
 export const Dropdown = memo(
@@ -28,17 +28,10 @@ export const Dropdown = memo(
     const referenceElementRef = useRef<HTMLInputElement>(null);
     const popperElementRef = useRef<HTMLInputElement>(null);
 
-    const { styles, attributes } = usePopper(referenceElementRef.current, popperElementRef.current, {
-      modifiers: [
-        // { name: 'eventListeners', options: { scroll: isOpen, resize: isOpen } },
-        { name: 'offset', options: { offset: [0, 10] } },
-      ],
-      placement,
-      strategy: 'absolute',
-    });
+    const memoizedItems = useMemo(() => items, [items]);
 
     // We only need the items to pass down to Downshift, not groups
-    const onlyItems = useMemo(() => flattenItems(items), [items]);
+    const onlyItems = useMemo(() => flattenItems(memoizedItems), [memoizedItems]);
 
     // We need to keep track of key since we need to use it between groups.
     const itemKey = useRef(0);
@@ -70,6 +63,15 @@ export const Dropdown = memo(
       onSelectedItemChange: handleOnSelectedItemChange,
       selectedItem: null,
       toggleButtonId: toggle.props.id,
+    });
+
+    const { styles, attributes, update } = usePopper(referenceElementRef.current, popperElementRef.current, {
+      modifiers: [
+        { name: 'eventListeners', options: { scroll: isOpen, resize: isOpen } },
+        { name: 'offset', options: { offset: [0, 10] } },
+      ],
+      placement,
+      strategy: 'absolute',
     });
 
     const renderToggle = useMemo(() => {
@@ -166,16 +168,16 @@ export const Dropdown = memo(
       // Reset the key every time we rerender children
       itemKey.current = 0;
 
-      if (Array.isArray(items) && items.every(isGroup)) {
-        return (items as DropdownItemGroup[]).map((group, index) => (
+      if (Array.isArray(memoizedItems) && memoizedItems.every(isGroup)) {
+        return (memoizedItems as DropdownItemGroup[]).map((group, index) => (
           <Fragment key={index}>{renderGroup(group)}</Fragment>
         ));
       }
 
-      if (Array.isArray(items) && items.every(isItem)) {
-        return renderItems(items as Array<DropdownItem | DropdownLinkItem>);
+      if (Array.isArray(memoizedItems) && memoizedItems.every(isItem)) {
+        return renderItems(memoizedItems as Array<DropdownItem | DropdownLinkItem>);
       }
-    }, [items, renderGroup, renderItems]);
+    }, [memoizedItems, renderGroup, renderItems]);
 
     const renderList = useMemo(
       () => (
@@ -195,21 +197,33 @@ export const Dropdown = memo(
             },
             ref: popperElementRef,
           })}
+          isOpen={isOpen}
           maxHeight={maxHeight}
           style={styles.popper}
+          update={update}
           {...attributes.popper}
         >
           {isOpen && renderChildren}
         </List>
       ),
-      [attributes.popper, getMenuProps, highlightedIndex, isOpen, maxHeight, renderChildren, rest, styles.popper],
+      [
+        attributes.popper,
+        getMenuProps,
+        highlightedIndex,
+        isOpen,
+        maxHeight,
+        renderChildren,
+        rest,
+        styles.popper,
+        update,
+      ],
     );
 
     return (
-      <div>
+      <>
         {renderToggle}
-        {renderList}
-      </div>
+        <StyledBox>{renderList}</StyledBox>
+      </>
     );
   },
 );

@@ -51,12 +51,6 @@ export const MultiSelect = typedMemo(
     const referenceElementRef = useRef<HTMLInputElement>(null);
     const popperElementRef = useRef<HTMLInputElement>(null);
 
-    const { styles, attributes } = usePopper(referenceElementRef.current, popperElementRef.current, {
-      modifiers: [{ name: 'offset', options: { offset: [0, 10] } }],
-      placement,
-      strategy: positionFixed ? 'fixed' : 'absolute',
-    });
-
     // Merge options and action
     const initialOptions = useMemo(() => (action ? [...options, action] : options), [action, options]);
 
@@ -212,6 +206,15 @@ export const MultiSelect = typedMemo(
       onSelectedItemChange: handleOnSelectedItemChange,
       selectedItem: null,
       stateReducer: handleStateReducer,
+    });
+
+    const { styles, attributes, update } = usePopper(referenceElementRef.current, popperElementRef.current, {
+      modifiers: [
+        { name: 'eventListeners', options: { scroll: isOpen, resize: isOpen } },
+        { name: 'offset', options: { offset: [0, 10] } },
+      ],
+      placement,
+      strategy: positionFixed ? 'fixed' : 'absolute',
     });
 
     const setCallbackRef = useCallback(
@@ -385,14 +388,16 @@ export const MultiSelect = typedMemo(
       return (
         <List
           {...getMenuProps({ ref: popperElementRef })}
+          isOpen={isOpen}
           maxHeight={maxHeight}
           style={styles.popper}
+          update={update}
           {...attributes.popper}
         >
           {isOpen && renderOptions}
         </List>
       );
-    }, [attributes.popper, getMenuProps, isOpen, maxHeight, renderOptions, styles.popper]);
+    }, [attributes.popper, getMenuProps, isOpen, maxHeight, renderOptions, styles.popper, update]);
 
     return (
       <div>

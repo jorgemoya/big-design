@@ -52,12 +52,6 @@ export const Select = typedMemo(
     const referenceElementRef = useRef<HTMLInputElement>(null);
     const popperElementRef = useRef<HTMLInputElement>(null);
 
-    const { styles, attributes } = usePopper(referenceElementRef.current, popperElementRef.current, {
-      modifiers: [{ name: 'offset', options: { offset: [0, 10] } }],
-      placement,
-      strategy: positionFixed ? 'fixed' : 'absolute',
-    });
-
     // Merge options and action
     const flattenedOptions = useMemo(() => (action ? [...flattenOptions(options), action] : flattenOptions(options)), [
       action,
@@ -189,6 +183,15 @@ export const Select = typedMemo(
       onSelectedItemChange: handleOnSelectedItemChange,
       selectedItem: selectedOption || null,
       stateReducer: handleStateReducer,
+    });
+
+    const { styles, attributes, update } = usePopper(referenceElementRef.current, popperElementRef.current, {
+      modifiers: [
+        { name: 'eventListeners', options: { scroll: isOpen, resize: isOpen } },
+        { name: 'offset', options: { offset: [0, 10] } },
+      ],
+      placement,
+      strategy: positionFixed ? 'fixed' : 'absolute',
     });
 
     const renderLabel = useMemo(() => {
@@ -398,14 +401,16 @@ export const Select = typedMemo(
       return (
         <List
           {...getMenuProps({ ref: popperElementRef })}
+          isOpen={isOpen}
           maxHeight={maxHeight}
           style={styles.popper}
+          update={update}
           {...attributes.popper}
         >
           {isOpen && renderChildren}
         </List>
       );
-    }, [attributes.popper, getMenuProps, isOpen, maxHeight, renderChildren, styles.popper]);
+    }, [attributes.popper, getMenuProps, isOpen, maxHeight, renderChildren, styles.popper, update]);
 
     return (
       <div>
